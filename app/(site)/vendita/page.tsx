@@ -5,7 +5,9 @@ import { JsonLd } from "@/components/JsonLd";
 import { Reveal } from "@/components/motion/Reveal";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+// Prerendered and refreshed on demand after an admin edit
+// (see lib/revalidate.ts); the interval is the safety net.
+export const revalidate = 600;
 
 export const metadata: Metadata = {
   title: "Immobili in vendita a Como e provincia",

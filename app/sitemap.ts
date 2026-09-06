@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { getProperties } from "@/lib/db";
 import { SITE } from "@/lib/site";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const statics = ["", "/vendita", "/ristrutturazioni", "/showroom", "/chi-siamo", "/contatti"].map((path) => ({

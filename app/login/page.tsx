@@ -6,7 +6,7 @@ import { Lock } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
   async function submit(e: React.FormEvent<HTMLFormElement>) {
@@ -20,11 +20,13 @@ export default function LoginPage() {
     });
     setLoading(false);
     if (res.ok) {
+      setError("");
       router.push("/admin");
       router.refresh();
-    } else {
-      setError(true);
+      return;
     }
+    const body = (await res.json().catch(() => null)) as { error?: string } | null;
+    setError(body?.error || "Password non corretta.");
   }
 
   return (
@@ -44,7 +46,7 @@ export default function LoginPage() {
           className="mt-1 w-full rounded-xl border border-line bg-night px-4 py-3 text-sm text-white"
           placeholder="••••••••"
         />
-        {error && <p className="mt-2 text-sm text-accent-red">Password non corretta.</p>}
+        {error && <p className="mt-2 text-sm text-accent-red" role="alert">{error}</p>}
         <button
           disabled={loading}
           className="mt-5 w-full rounded-full bg-brand py-3 text-sm font-bold text-white transition hover:brightness-110 disabled:opacity-50"

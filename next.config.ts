@@ -19,8 +19,10 @@ const nextConfig: NextConfig = {
       { source: "/immobili", destination: "/vendita", permanent: true },
       { source: "/immobili-in-vendita", destination: "/vendita", permanent: true },
       { source: "/appartamenti-in-vendita", destination: "/vendita", permanent: true },
-      { source: "/feed", destination: "/api/feed/immobiliare", permanent: false },
-      { source: "/comments/feed", destination: "/api/feed/xml", permanent: false },
+      // Old WordPress RSS endpoints. The portal feeds live behind a secret key,
+      // so these point at the public listing page instead.
+      { source: "/feed", destination: "/vendita", permanent: true },
+      { source: "/comments/feed", destination: "/vendita", permanent: true },
       { source: "/xmlrpc.php", destination: "/", permanent: true },
       { source: "/wp-json", destination: "/", permanent: true },
     ];

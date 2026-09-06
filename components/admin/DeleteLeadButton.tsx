@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 export function DeleteLeadButton({ id }: { id: string }) {
   const router = useRouter();
   async function del() {
+    if (!confirm("Eliminare questa richiesta?")) return;
     await fetch(`/api/lead/${id}`, { method: "DELETE" });
     router.refresh();
   }

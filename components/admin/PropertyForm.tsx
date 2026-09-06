@@ -107,7 +107,8 @@ export function PropertyForm({ initial }: { initial?: Property }) {
     });
     setBusy(false);
     if (!res.ok) {
-      setError("Salvataggio non riuscito. Controlla i campi.");
+      const body = (await res.json().catch(() => null)) as { error?: string } | null;
+      setError(body?.error || "Salvataggio non riuscito. Controlla i campi.");
       return;
     }
     router.push("/admin");

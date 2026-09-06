@@ -5,16 +5,36 @@ import type { Property } from "@/lib/types";
 import { PropertyCard } from "@/components/PropertyCard";
 import { formatPrice } from "@/lib/format";
 
+const STEP = 10000;
+const ECO_CLASSES = ["A4", "A3", "A2", "A1"];
+
+/** Slider bounds follow the catalogue, so no listing can fall outside the range. */
+function priceBounds(properties: Property[]) {
+  const prices = properties.map((p) => p.price).filter((price) => Number.isFinite(price) && price > 0);
+  if (!prices.length) return { min: 0, max: 0 };
+  const min = Math.floor(Math.min(...prices) / STEP) * STEP;
+  const max = Math.ceil(Math.max(...prices) / STEP) * STEP;
+  return { min: Math.max(0, min), max: Math.max(max, min + STEP) };
+}
+
 export function PropertyFilters({ properties }: { properties: Property[] }) {
   const cities = Array.from(new Set(properties.map((p) => p.city)));
   const types = Array.from(new Set(properties.map((p) => p.propertyType)));
-  const maxPrice = Math.max(...properties.map((p) => p.price), 0);
+  const bounds = useMemo(() => priceBounds(properties), [properties]);
 
   const [city, setCity] = useState("");
   const [type, setType] = useState("");
   const [minArea, setMinArea] = useState(0);
-  const [maxP, setMaxP] = useState(maxPrice);
+  const [maxP, setMaxP] = useState(bounds.max);
   const [ecoOnly, setEcoOnly] = useState(false);
+  const [knownMax, setKnownMax] = useState(bounds.max);
+
+  // Keep the cap pinned to the top of the range when the catalogue changes,
+  // otherwise a newly published listing would sit above the current filter.
+  if (knownMax !== bounds.max) {
+    setKnownMax(bounds.max);
+    setMaxP(bounds.max);
+  }
 
   const filtered = useMemo(
     () =>
@@ -23,10 +43,10 @@ export function PropertyFilters({ properties }: { properties: Property[] }) {
           (!city || p.city === city) &&
           (!type || p.propertyType === type) &&
           p.area >= minArea &&
-          p.price <= maxP &&
-          (!ecoOnly || ["A4", "A3", "A2", "A1"].includes(p.energyClass))
+          (bounds.max === 0 || p.price <= maxP) &&
+          (!ecoOnly || ECO_CLASSES.includes(p.energyClass))
       ),
-    [properties, city, type, minArea, maxP, ecoOnly]
+    [properties, city, type, minArea, maxP, ecoOnly, bounds.max]
   );
 
   return (
@@ -57,25 +77,27 @@ export function PropertyFilters({ properties }: { properties: Property[] }) {
             <option value={120}>≥ 120 m²</option>
             <option value={150}>≥ 150 m²</option>
           </select>
-          <div className="flex items-center gap-2 text-sm text-slate-400">
-            <span>Fino a</span>
-            <input
-              type="range"
-              min={100000}
-              max={maxPrice || 1000000}
-              step={10000}
-              value={maxP}
-              onChange={(e) => setMaxP(Number(e.target.value))}
-              className="w-36 accent-brand"
-              aria-label="Prezzo massimo"
-            />
-            <span className="w-24 font-semibold text-white">{maxP ? formatPrice(maxP) : "-"}</span>
-          </div>
+          {bounds.max > 0 && (
+            <div className="flex items-center gap-2 text-sm text-slate-400">
+              <span>Fino a</span>
+              <input
+                type="range"
+                min={bounds.min}
+                max={bounds.max}
+                step={STEP}
+                value={maxP}
+                onChange={(e) => setMaxP(Number(e.target.value))}
+                className="w-36 accent-brand"
+                aria-label="Prezzo massimo"
+              />
+              <span className="w-24 font-semibold text-white">{formatPrice(maxP)}</span>
+            </div>
+          )}
           <label className="ml-auto flex cursor-pointer items-center gap-2 text-sm text-slate-300">
             <input type="checkbox" checked={ecoOnly} onChange={(e) => setEcoOnly(e.target.checked)} className="h-4 w-4 accent-accent-green" />
             Classe energetica A
           </label>
-          <span className="text-sm text-slate-500">{filtered.length} risultati</span>
+          <span className="text-sm text-slate-500" role="status">{filtered.length} risultati</span>
         </div>
       </div>
 

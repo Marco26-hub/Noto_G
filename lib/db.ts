@@ -22,11 +22,27 @@ function readJson<T>(file: string, fallback: T): T {
   }
 }
 
+/**
+ * Thrown when the JSON fallback cannot be written — typically a serverless
+ * deploy, where the bundle is read-only and DATABASE_URL was never set.
+ */
+export class StorageError extends Error {
+  constructor() {
+    super("Archiviazione non disponibile: configura DATABASE_URL per salvare i dati in produzione.");
+    this.name = "StorageError";
+  }
+}
+
 function writeJson(file: string, value: unknown) {
-  fs.mkdirSync(DATA_DIR, { recursive: true });
-  const tmp = file + ".tmp";
-  fs.writeFileSync(tmp, JSON.stringify(value, null, 2), "utf8");
-  fs.renameSync(tmp, file);
+  try {
+    fs.mkdirSync(DATA_DIR, { recursive: true });
+    const tmp = file + ".tmp";
+    fs.writeFileSync(tmp, JSON.stringify(value, null, 2) + "\n", "utf8");
+    fs.renameSync(tmp, file);
+  } catch (error) {
+    console.error("Scrittura su disco non riuscita.", error);
+    throw new StorageError();
+  }
 }
 
 function database() {
@@ -166,17 +182,27 @@ export async function getLeads(): Promise<Lead[]> {
   }
 }
 
-export async function addLead(lead: Lead) {
+/**
+ * Stores a lead and reports whether it was actually persisted. A failure here
+ * must not be swallowed: the visitor has to be told the message did not arrive.
+ */
+export async function addLead(lead: Lead): Promise<boolean> {
   const db = database();
-  if (!db) {
-    const list = await getLeads();
-    list.unshift(lead);
-    writeJson(LEADS_FILE, list);
-    return;
+  try {
+    if (!db) {
+      const list = await getLeads();
+      list.unshift(lead);
+      writeJson(LEADS_FILE, list);
+      return true;
+    }
+    await ensureSchema();
+    await db`INSERT INTO leads (id, data, created_at)
+      VALUES (${lead.id}, ${JSON.stringify(lead)}::jsonb, ${lead.createdAt})`;
+    return true;
+  } catch (error) {
+    console.error("Lead non salvato.", lead.email, error);
+    return false;
   }
-  await ensureSchema();
-  await db`INSERT INTO leads (id, data, created_at)
-    VALUES (${lead.id}, ${JSON.stringify(lead)}::jsonb, ${lead.createdAt})`;
 }
 
 export async function deleteLead(id: string) {

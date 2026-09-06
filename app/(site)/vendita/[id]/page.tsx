@@ -7,9 +7,19 @@ import { energyColor, formatPrice, statusLabel } from "@/lib/format";
 import { PropertyGallery } from "@/components/PropertyGallery";
 import { PropertyCard } from "@/components/PropertyCard";
 import { JsonLd } from "@/components/JsonLd";
+import { ContactForm } from "@/components/ContactForm";
 import type { Metadata } from "next";
 
-export const dynamic = "force-dynamic";
+// Regenerated on demand after an admin edit (see lib/revalidate.ts); the
+// interval is the safety net if a revalidation is ever missed.
+export const revalidate = 600;
+
+// Prerender the current catalogue; listings published later are generated on
+// first request and then cached the same way.
+export async function generateStaticParams() {
+  const properties = await getProperties();
+  return properties.filter((p) => p.status !== "venduto").map((p) => ({ id: p.id }));
+}
 
 export async function generateMetadata(
   props: PageProps<"/vendita/[id]">
@@ -38,7 +48,7 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
     "@type": "Residence",
     name: p.title,
     description: p.description,
-      url: `${SITE.base}/vendita/${p.id}`,
+    url: `${SITE.base}/vendita/${p.id}`,
     image: p.images.map((i) => (i.startsWith("http") ? i : `${SITE.base}${i}`)),
     address: {
       "@type": "PostalAddress",
@@ -120,6 +130,16 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
               />
             </div>
           </div>
+
+          <div className="mt-12" id="richiedi-info">
+            <h2 className="font-display text-xl font-semibold text-white">Richiedi informazioni</h2>
+            <p className="mt-2 text-sm text-slate-500">
+              Scrivici per questo immobile: la richiesta arriva con il riferimento {p.reference} già allegato.
+            </p>
+            <div className="premium-panel mt-5 rounded-lg p-6">
+              <ContactForm propertyRef={p.reference} propertyTitle={p.title} />
+            </div>
+          </div>
         </div>
 
         <aside>
@@ -137,11 +157,8 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
               >
                 <MessageCircle size={17} /> WhatsApp la visita
               </a>
-              <a
-                href={`mailto:${SITE.email}?subject=${encodeURIComponent(`Visita rif. ${p.reference}`)}&body=${encodeURIComponent(waMessage)}`}
-                className="button-secondary w-full"
-              >
-                <Mail size={16} /> Richiedi info via email
+              <a href="#richiedi-info" className="button-secondary w-full">
+                <Mail size={16} /> Richiedi informazioni
               </a>
               <p className="text-center text-xs text-slate-500">Rispondiamo in orario d’ufficio, anche su WhatsApp.</p>
             </div>

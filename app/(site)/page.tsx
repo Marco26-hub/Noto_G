@@ -7,7 +7,9 @@ import { Reveal } from "@/components/motion/Reveal";
 import { PropertyCard } from "@/components/PropertyCard";
 import { JsonLd } from "@/components/JsonLd";
 
-export const dynamic = "force-dynamic";
+// Prerendered and refreshed on demand after an admin edit
+// (see lib/revalidate.ts); the interval is the safety net.
+export const revalidate = 600;
 
 const SERVICES = [
   { icon: Building2, title: "Costruzioni civili e industriali", desc: "Progetti residenziali, commerciali e industriali gestiti con struttura, competenze e controllo." },
