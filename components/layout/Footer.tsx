@@ -6,19 +6,21 @@ import { AtSign, Camera, Mail, MapPin, Phone } from "lucide-react";
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="border-t border-line/60 bg-ink/60">
+    <footer className="border-t border-line/70 bg-ink">
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
         <div className="grid gap-10 md:grid-cols-4">
           <div>
-            <Image src="/brand/logo.png" alt="Noto G." width={140} height={30} className="h-8 w-auto invert brightness-0" />
+            <div className="brand-logo-window">
+              <Image src="/brand/logo.png" alt="Noto G." fill sizes="176px" />
+            </div>
             <p className="mt-4 max-w-xs text-sm text-slate-400">
-              Costruzioni e ristrutturazioni dal {SITE.since}. Showroom e prenotazioni a Como.
+              Costruzioni, ristrutturazioni e immobili a Como. Esperienza di cantiere dal {SITE.since}.
             </p>
             <div className="mt-4 flex gap-3">
-              <a href={SITE.social.facebook} target="_blank" rel="noopener" aria-label="Facebook" className="rounded-full border border-line/60 p-2 text-slate-300 transition hover:border-brand hover:text-brand-soft">
+              <a href={SITE.social.facebook} target="_blank" rel="noopener" aria-label="Facebook" className="rounded-md border border-line/70 p-2 text-slate-300 transition-colors hover:border-brand-soft hover:text-white">
                 <AtSign size={18} />
               </a>
-              <a href={SITE.social.instagram} target="_blank" rel="noopener" aria-label="Instagram" className="rounded-full border border-line/60 p-2 text-slate-300 transition hover:border-brand hover:text-brand-soft">
+              <a href={SITE.social.instagram} target="_blank" rel="noopener" aria-label="Instagram" className="rounded-md border border-line/70 p-2 text-slate-300 transition-colors hover:border-brand-soft hover:text-white">
                 <Camera size={18} />
               </a>
             </div>
@@ -67,11 +69,9 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-line/60 pt-6 text-xs text-slate-500 sm:flex-row">
           <p>© {year} Noto G. S.r.l. — Tutti i diritti riservati.</p>
-          <p className="flex items-center gap-1">
-            <span className="inline-block h-2 w-2 rounded-full bg-accent-green" />
-            <span className="inline-block h-2 w-2 rounded-full bg-white" />
-            <span className="inline-block h-2 w-2 rounded-full bg-accent-red" />
-            <span className="ml-1">Impresa italiana</span>
+          <p className="flex items-center gap-2">
+            <span className="inline-block h-px w-8 bg-brand-soft" />
+            <span>Impresa italiana</span>
           </p>
         </div>
       </div>

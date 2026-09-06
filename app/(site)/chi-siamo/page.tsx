@@ -9,7 +9,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Chi siamo — Noto G. costruzioni e ristrutturazioni",
   description:
-    "Impresa familiare fondata nel 1990 da Giacomo Noto. Oggi gestita da Giuseppe, Giovanni e Giada con oltre 30 anni di esperienza e un team di 30 dipendenti.",
+    "Impresa familiare fondata nel 1990 da Giacomo Noto. Oggi gestita da Giuseppe, Giovanni e Giada con oltre 35 anni di esperienza e più di 40 professionisti.",
   alternates: { canonical: "/chi-siamo" },
 };
 
@@ -24,34 +24,38 @@ export default function ChiSiamoPage() {
   return (
     <>
       <JsonLd data={ld} />
-      <section className="relative overflow-hidden">
-        <Image src="/works/lavori2.jpg" alt="Team Noto G al lavoro" fill priority className="object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/60 to-night/30" />
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <section className="relative min-h-[62svh] overflow-hidden border-b border-line/60">
+        <Image src="/works/lavori2.jpg" alt="Team Noto G al lavoro" fill priority className="object-cover opacity-60 [filter:saturate(.68)_contrast(1.08)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/60 to-night/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-night via-transparent to-night/25" />
+        <div className="relative mx-auto flex min-h-[62svh] max-w-7xl items-end px-4 py-20 sm:px-6 lg:px-8">
+          <div>
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-panel/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-soft">
+            <p className="section-kicker">
               <Users size={13} /> Chi siamo
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mt-5 max-w-3xl font-display text-5xl font-bold text-white">
-              Un&apos;impresa a conduzione familiare, da Giacomo a Giuseppe, Giovanni e Giada.
+            <h1 className="mt-5 max-w-4xl font-display text-5xl font-semibold leading-[1.08] text-white sm:text-6xl">
+              Una famiglia d&rsquo;impresa. Una struttura costruita nel tempo.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mt-4 max-w-2xl text-slate-300">
               Fondata nel 1990 come impresa artigiana, Noto G. diventa S.r.l. nel 2006. Oggi
-              guidiamo un team di oltre 30 dipendenti con attenzione alla qualità dei materiali e
-              al rispetto delle normative.
+              la seconda generazione guida una squadra di oltre 40 professionisti, con attenzione
+              alla qualità dei materiali e al rispetto delle normative.
             </p>
           </Reveal>
+          </div>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr]">
           <Reveal>
-            <h2 className="font-display text-4xl font-bold text-white">La nostra storia</h2>
+            <p className="section-kicker">Radici e continuità</p>
+            <h2 className="mt-4 font-display text-4xl font-semibold text-white">La nostra storia</h2>
             <div className="mt-6 space-y-4 text-slate-400">
               <p>
                 Nel corso di oltre 30 anni, la famiglia Noto ha consolidato la propria presenza sul
@@ -67,13 +71,13 @@ export default function ChiSiamoPage() {
             <div className="mt-8 flex flex-wrap gap-6">
               <div>
                 <p className="font-display text-4xl font-bold text-white">
-                  <Counter to={30} suffix="+" />
+                  <Counter to={40} suffix="+" />
                 </p>
-                <p className="text-sm text-slate-500">dipendenti specializzati</p>
+                <p className="text-sm text-slate-500">professionisti in squadra</p>
               </div>
               <div>
                 <p className="font-display text-4xl font-bold text-white">
-                  <Counter to={30} suffix="+" />
+                  <Counter to={35} suffix="+" />
                 </p>
                 <p className="text-sm text-slate-500">anni di esperienza</p>
               </div>
@@ -86,7 +90,7 @@ export default function ChiSiamoPage() {
             </div>
           </Reveal>
           <Reveal delay={0.15}>
-            <div className="rounded-2xl border border-line/60 bg-panel/60 p-7">
+            <div className="premium-panel rounded-lg p-7">
               <h3 className="font-display text-xl font-semibold text-white">Certificazioni</h3>
               <ul className="mt-6 space-y-4">
                 <li className="flex items-start gap-3 text-sm text-slate-300">

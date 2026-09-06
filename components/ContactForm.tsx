@@ -41,7 +41,7 @@ export function ContactForm({ propertyRef }: Props) {
 
   if (sent) {
     return (
-      <div className="rounded-2xl border border-accent-green/40 bg-accent-green/10 p-6 text-accent-green">
+      <div className="rounded-lg border border-accent-green/40 bg-accent-green/10 p-6 text-accent-green" role="status">
         Messaggio inviato. Ti ricontattiamo entro ore lavorative.{" "}
         {propertyRef ? `Riferimento: ${propertyRef}.` : "Grazie!"}
       </div>
@@ -54,41 +54,39 @@ export function ContactForm({ propertyRef }: Props) {
       <input name="url" className="hidden" tabIndex={-1} autoComplete="off" />
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
-          <label className="mb-1 block text-xs text-slate-400">Nome e cognome *</label>
-          <input name="name" required className="w-full rounded-xl border border-line bg-panel/80 px-4 py-3 text-sm placeholder-slate-500" placeholder="Mario Rossi" defaultValue={propertyRef ? `Richiesta rif. ${propertyRef}` : undefined} />
+          <label htmlFor="contact-name" className="mb-1.5 block text-xs font-medium text-slate-400">Nome e cognome *</label>
+          <input id="contact-name" name="name" autoComplete="name" required className="w-full rounded-md border border-line bg-ink/80 px-4 py-3 text-sm placeholder-slate-500" placeholder="Mario Rossi" defaultValue={propertyRef ? `Richiesta rif. ${propertyRef}` : undefined} />
         </div>
         <div>
-          <label className="mb-1 block text-xs text-slate-400">Email *</label>
-          <input type="email" name="email" required className="w-full rounded-xl border border-line bg-panel/80 px-4 py-3 text-sm placeholder-slate-500" placeholder="mario@esempio.it" />
+          <label htmlFor="contact-email" className="mb-1.5 block text-xs font-medium text-slate-400">Email *</label>
+          <input id="contact-email" type="email" name="email" autoComplete="email" required className="w-full rounded-md border border-line bg-ink/80 px-4 py-3 text-sm placeholder-slate-500" placeholder="mario@esempio.it" />
         </div>
       </div>
       <div>
-        <label className="mb-1 block text-xs text-slate-400">Telefono</label>
-        <input name="phone" className="w-full rounded-xl border border-line bg-panel/80 px-4 py-3 text-sm placeholder-slate-500" placeholder="+39 ..." />
+        <label htmlFor="contact-phone" className="mb-1.5 block text-xs font-medium text-slate-400">Telefono</label>
+        <input id="contact-phone" name="phone" type="tel" autoComplete="tel" className="w-full rounded-md border border-line bg-ink/80 px-4 py-3 text-sm placeholder-slate-500" placeholder="+39 ..." />
       </div>
       <div>
-        <label className="mb-1 block text-xs text-slate-400">Tipo di richiesta</label>
-        <select name="type" className="w-full rounded-xl border border-line bg-panel/80 px-4 py-3 text-sm">
+        <label htmlFor="contact-type" className="mb-1.5 block text-xs font-medium text-slate-400">Tipo di richiesta</label>
+        <select id="contact-type" name="type" className="w-full rounded-md border border-line bg-ink/80 px-4 py-3 text-sm">
           <option value="contatto">Richiesta generale</option>
           <option value="appuntamento">Prenota appuntamento</option>
           <option value="immobile">Info su un immobile</option>
         </select>
       </div>
-      {(propertyRef || new Date().getDate() >= 1) && (
-        <div>
-          <label className="mb-1 block text-xs text-slate-400">Data preferita (appuntamento)</label>
-          <input type="date" name="date" className="w-full rounded-xl border border-line bg-panel/80 px-4 py-3 text-sm" />
-        </div>
-      )}
       <div>
-        <label className="mb-1 block text-xs text-slate-400">Messaggio *</label>
-        <textarea name="message" required rows={5} className="w-full rounded-xl border border-line bg-panel/80 px-4 py-3 text-sm placeholder-slate-500" placeholder="Scrivi il tuo messaggio..." />
+        <label htmlFor="contact-date" className="mb-1.5 block text-xs font-medium text-slate-400">Data preferita (appuntamento)</label>
+        <input id="contact-date" type="date" name="date" className="w-full rounded-md border border-line bg-ink/80 px-4 py-3 text-sm" />
       </div>
-      {err && <p className="text-sm text-accent-red">{err}</p>}
-      <button className="flex w-full items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-bold text-white transition hover:brightness-110">
+      <div>
+        <label htmlFor="contact-message" className="mb-1.5 block text-xs font-medium text-slate-400">Messaggio *</label>
+        <textarea id="contact-message" name="message" required rows={5} className="w-full rounded-md border border-line bg-ink/80 px-4 py-3 text-sm placeholder-slate-500" placeholder="Descrivi brevemente il progetto o la richiesta..." />
+      </div>
+      {err && <p className="text-sm text-accent-red" role="alert">{err}</p>}
+      <button type="submit" className="button-primary w-full">
         <Send size={16} /> Invia messaggio
       </button>
-      <p className="text-xs text-slate-500">Inviando il messaggio accetti di essere ricontattato/a da Noto G.</p>
+      <p className="text-xs text-slate-500">I dati saranno usati esclusivamente per ricontattarti in merito alla richiesta.</p>
     </form>
   );
 }

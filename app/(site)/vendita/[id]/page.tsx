@@ -56,7 +56,7 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
   const waMessage = `Ciao Noto G! Mi piace l'immobile rif. ${p.reference} "${p.title}" a ${p.city} (${formatPrice(p.price)}). Vorrei prenotare una visita.`;
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
       <JsonLd data={ld} />
       <Link href="/vendita" className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-white">
         <ArrowLeft size={15} /> Tutti gli annunci
@@ -81,7 +81,7 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
             <MapPin size={15} className="mt-0.5 text-brand-soft" /> {p.address}, {p.city} ({p.province})
           </p>
 
-          <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-line/60 bg-panel/60 p-5 sm:grid-cols-4">
+          <div className="premium-panel mt-6 grid grid-cols-2 gap-4 rounded-lg p-5 sm:grid-cols-4">
             <Stat icon={<BedDouble size={18} />} label={`${p.rooms} locali`} />
             <Stat icon={<Bath size={18} />} label={`${p.bathrooms} bagni`} />
             <Stat icon={<Ruler size={18} />} label={`${p.area} m²`} />
@@ -101,7 +101,7 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
               <h2 className="font-display text-xl font-semibold text-white">Caratteristiche</h2>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {p.amenities.map((a) => (
-                  <li key={a} className="rounded-full border border-line/60 px-3 py-1.5 text-sm text-slate-300">
+                  <li key={a} className="rounded-md border border-line/70 bg-panel/50 px-3 py-1.5 text-sm text-slate-300">
                     {a}
                   </li>
                 ))}
@@ -111,7 +111,7 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
 
           <div className="mt-8">
             <h2 className="font-display text-xl font-semibold text-white">Posizione</h2>
-            <div className="mt-4 overflow-hidden rounded-2xl border border-line/60">
+            <div className="mt-4 overflow-hidden rounded-lg border border-line/60">
               <iframe
                 title={`Mappa ${p.address}`}
                 src={`https://www.google.com/maps?q=${encodeURIComponent(`${p.address}, ${p.city}`)}&output=embed`}
@@ -123,7 +123,7 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
         </div>
 
         <aside>
-          <div className="sticky top-24 rounded-2xl border border-brand/30 bg-panel/80 p-6 shadow-2xl shadow-brand/10">
+          <div className="premium-panel sticky top-24 rounded-lg p-6">
             <p className="text-3xl font-bold text-white">{formatPrice(p.price)}</p>
             {p.expenses ? (
               <p className="mt-1 text-sm text-slate-400">Spese condominio: {formatPrice(p.expenses)}/mese</p>
@@ -133,13 +133,13 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
                 href={waLink(waMessage)}
                 target="_blank"
                 rel="noopener"
-                className="flex items-center justify-center gap-2 rounded-full bg-accent-green px-6 py-3.5 text-sm font-bold text-night transition hover:brightness-110"
+                className="button-whatsapp w-full"
               >
                 <MessageCircle size={17} /> WhatsApp la visita
               </a>
               <a
                 href={`mailto:${SITE.email}?subject=${encodeURIComponent(`Visita rif. ${p.reference}`)}&body=${encodeURIComponent(waMessage)}`}
-                className="flex items-center justify-center gap-2 rounded-full border border-line px-6 py-3.5 text-sm font-bold text-slate-200 hover:bg-white/5"
+                className="button-secondary w-full"
               >
                 <Mail size={16} /> Richiedi info via email
               </a>

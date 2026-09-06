@@ -11,13 +11,13 @@ export function PropertyGallery({ images, title }: { images: string[]; title: st
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-3">
+      <div className="mb-8 grid grid-cols-2 gap-3">
         <button
           onClick={() => {
             setIndex(0);
             setOpen(true);
           }}
-          className="relative col-span-2 aspect-[16/9] overflow-hidden rounded-2xl"
+          className="media-frame relative col-span-2 aspect-[16/9] overflow-hidden"
         >
           <Image src={list[0]} alt={title} fill priority className="object-cover" />
         </button>
@@ -28,7 +28,7 @@ export function PropertyGallery({ images, title }: { images: string[]; title: st
               setIndex(i + 1);
               setOpen(true);
             }}
-            className="relative aspect-[16/9] overflow-hidden rounded-2xl"
+            className="media-frame relative aspect-[16/9] overflow-hidden"
           >
             <Image src={img} alt={title} fill className="object-cover" />
           </button>
@@ -40,11 +40,11 @@ export function PropertyGallery({ images, title }: { images: string[]; title: st
           className="fixed inset-0 z-90 flex items-center justify-center bg-night/90 backdrop-blur"
           onClick={() => setOpen(false)}
         >
-          <button className="absolute right-5 top-5 rounded-full bg-panel p-2 text-white" onClick={() => setOpen(false)} aria-label="Chiudi">
+          <button className="absolute right-5 top-5 rounded-md border border-line bg-panel p-2 text-white" onClick={() => setOpen(false)} aria-label="Chiudi">
             <X size={22} />
           </button>
           <button
-            className="absolute left-5 rounded-full bg-panel p-2 text-white"
+            className="absolute left-5 rounded-md border border-line bg-panel p-2 text-white"
             onClick={(e) => {
               e.stopPropagation();
               setIndex((index - 1 + list.length) % list.length);
@@ -57,7 +57,7 @@ export function PropertyGallery({ images, title }: { images: string[]; title: st
             <Image src={list[index]} alt={title} fill className="object-contain" />
           </div>
           <button
-            className="absolute right-5 rounded-full bg-panel p-2 text-white"
+            className="absolute right-5 rounded-md border border-line bg-panel p-2 text-white"
             onClick={(e) => {
               e.stopPropagation();
               setIndex((index + 1) % list.length);

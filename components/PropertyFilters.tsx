@@ -31,15 +31,15 @@ export function PropertyFilters({ properties }: { properties: Property[] }) {
 
   return (
     <div>
-      <div className="sticky top-20 z-30 -mx-4 border-y border-line/60 bg-night/80 px-4 py-4 backdrop-blur-xl sm:-mx-6 sm:px-6">
+      <div className="sticky top-20 z-30 -mx-4 border-y border-line/70 bg-night/90 px-4 py-4 shadow-xl shadow-black/15 backdrop-blur-xl sm:-mx-6 sm:px-6">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center gap-3">
-          <select value={city} onChange={(e) => setCity(e.target.value)} className="rounded-lg border border-line bg-panel px-3 py-2 text-sm text-slate-200">
+          <select aria-label="Filtra per città" value={city} onChange={(e) => setCity(e.target.value)} className="rounded-md border border-line bg-panel px-3 py-2.5 text-sm text-slate-200">
             <option value="">Tutte le città</option>
             {cities.map((c) => (
               <option key={c} value={c}>{c}</option>
             ))}
           </select>
-          <select value={type} onChange={(e) => setType(e.target.value)} className="rounded-lg border border-line bg-panel px-3 py-2 text-sm text-slate-200">
+          <select aria-label="Filtra per tipologia" value={type} onChange={(e) => setType(e.target.value)} className="rounded-md border border-line bg-panel px-3 py-2.5 text-sm text-slate-200">
             <option value="">Tutte le tipologie</option>
             {types.map((t) => (
               <option key={t} value={t}>{t}</option>
@@ -48,7 +48,8 @@ export function PropertyFilters({ properties }: { properties: Property[] }) {
           <select
             value={minArea}
             onChange={(e) => setMinArea(Number(e.target.value))}
-            className="rounded-lg border border-line bg-panel px-3 py-2 text-sm text-slate-200"
+            aria-label="Filtra per superficie minima"
+            className="rounded-md border border-line bg-panel px-3 py-2.5 text-sm text-slate-200"
           >
             <option value={0}>Superficie min.</option>
             <option value={60}>≥ 60 m²</option>
@@ -66,6 +67,7 @@ export function PropertyFilters({ properties }: { properties: Property[] }) {
               value={maxP}
               onChange={(e) => setMaxP(Number(e.target.value))}
               className="w-36 accent-brand"
+              aria-label="Prezzo massimo"
             />
             <span className="w-24 font-semibold text-white">{maxP ? formatPrice(maxP) : "-"}</span>
           </div>

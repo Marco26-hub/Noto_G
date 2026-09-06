@@ -31,26 +31,29 @@ export default function ShowroomPage() {
   return (
     <>
       <JsonLd data={ld} />
-      <section className="relative overflow-hidden">
-        <Image src="/uploads/demo/showroom1.jpg" alt="Interno showroom Noto G" fill priority className="object-cover opacity-40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-night via-night/60 to-night/30" />
-        <div className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8">
+      <section className="relative min-h-[62svh] overflow-hidden border-b border-line/60">
+        <Image src="/uploads/demo/showroom1.jpg" alt="Interno showroom Noto G" fill priority className="object-cover opacity-65 [filter:saturate(.76)_contrast(1.05)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/60 to-night/20" />
+        <div className="absolute inset-0 bg-gradient-to-t from-night via-transparent to-night/25" />
+        <div className="relative mx-auto flex min-h-[62svh] max-w-7xl items-end px-4 py-20 sm:px-6 lg:px-8">
+          <div>
           <Reveal>
-            <p className="inline-flex items-center gap-2 rounded-full border border-brand/40 bg-panel/60 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-soft">
+            <p className="section-kicker">
               <MapPin size={13} /> Showroom Como
             </p>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mt-5 max-w-3xl font-display text-5xl font-bold text-white">
-              Lo showroom dove scegli le finiture della tua nuova casa.
+            <h1 className="mt-5 max-w-3xl font-display text-5xl font-semibold leading-[1.08] text-white sm:text-6xl">
+              Le finiture si scelgono dal vivo.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mt-4 max-w-2xl text-slate-300">
-              Cucine, bagni, rivestimenti e materiali premiati sul territorio. Scegli cosa vive,
-              toccalo e sperimenta la tua nuova casa prima dei cantieri.
+              Cucine, bagni, rivestimenti e materiali da vedere e confrontare con il supporto
+              del nostro team, prima e durante il cantiere.
             </p>
           </Reveal>
+          </div>
         </div>
       </section>
 
@@ -58,15 +61,15 @@ export default function ShowroomPage() {
         <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line/60">
+              <div className="media-frame relative aspect-[4/3] overflow-hidden">
                 <Image src="/uploads/demo/showroom1.jpg" alt="Angolo showroom" fill className="object-cover" />
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-line/60">
+              <div className="media-frame relative aspect-[4/3] overflow-hidden">
                 <Image src="/uploads/demo/showroom2.jpg" alt="Moodboard showroom" fill className="object-cover" />
               </div>
             </div>
             <Reveal>
-              <div className="rounded-2xl border border-line/60 bg-panel/60 p-6">
+              <div className="premium-panel rounded-lg p-6">
                 <h2 className="font-display text-xl font-semibold text-white">Informazioni utili</h2>
                 <ul className="mt-4 space-y-2 text-sm text-slate-400">
                   <li className="flex items-start gap-2"><MapPin size={15} className="text-brand-soft" /> {SITE.showroom.address}, {SITE.showroom.cap} {SITE.showroom.city}</li>
@@ -76,7 +79,7 @@ export default function ShowroomPage() {
                   href={waLink(waMessage)}
                   target="_blank"
                   rel="noopener"
-                  className="mt-6 inline-flex items-center gap-2 rounded-full bg-accent-green px-6 py-3 text-sm font-bold text-night hover:brightness-110"
+                  className="button-whatsapp mt-6"
                 >
                   <CalendarClock size={15} /> Prenota su WhatsApp
                 </a>
@@ -85,10 +88,10 @@ export default function ShowroomPage() {
           </div>
 
           <Reveal delay={0.1}>
-            <div className="rounded-2xl border border-line/60 bg-panel/60 p-6">
+            <div className="premium-panel rounded-lg p-6">
               <h2 className="font-display text-xl font-semibold text-white">Dove siamo</h2>
-              <p className="mt-2 text-sm text-slate-400">Angolo via Borsieri, parcheggio lato col fronte su Viale Varese.</p>
-              <div className="mt-5 overflow-hidden rounded-xl border border-line/60">
+              <p className="mt-2 text-sm text-slate-400">Angolo via Borsieri, con accesso da Viale Varese.</p>
+              <div className="mt-5 overflow-hidden rounded-md border border-line/60">
                 <iframe title="Mappa showroom" src={SITE.showroom.mapsUrl} className="h-72 w-full" loading="lazy" />
               </div>
               <a href={SITE.showroom.mapsLink} target="_blank" rel="noopener" className="mt-4 inline-flex items-center gap-1 text-sm text-brand-soft">

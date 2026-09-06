@@ -8,9 +8,9 @@ export function PropertyCard({ p }: { p: Property }) {
   return (
     <Link
       href={`/vendita/${p.id}`}
-      className="group relative block overflow-hidden rounded-2xl border border-line/60 bg-panel transition-all hover:-translate-y-1 hover:border-brand/60 hover:shadow-2xl hover:shadow-brand/10"
+      className="premium-panel group relative block overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-1"
     >
-      <div className="relative aspect-[4/3] overflow-hidden">
+      <div className="relative aspect-[4/3] overflow-hidden border-b border-line/60">
         <Image
           src={p.images[0] || "/works/lavori2.jpg"}
           alt={p.title}
@@ -29,7 +29,7 @@ export function PropertyCard({ p }: { p: Property }) {
             </span>
           )}
         </div>
-        <span className="absolute bottom-3 left-3 rounded-full bg-night/80 px-3 py-1 text-sm font-semibold text-white backdrop-blur">
+        <span className="absolute bottom-3 left-3 rounded-md border border-white/15 bg-night/85 px-3 py-1.5 text-sm font-semibold text-white backdrop-blur">
           {formatPrice(p.price)}
         </span>
       </div>
@@ -38,7 +38,7 @@ export function PropertyCard({ p }: { p: Property }) {
         <div className="flex items-start justify-between gap-3">
           <div>
             <p className="text-[11px] uppercase tracking-widest text-brand-soft">{p.propertyType} · {p.city}</p>
-            <h3 className="mt-1 font-display text-lg font-semibold leading-snug text-white group-hover:text-brand-soft">
+            <h3 className="mt-1 font-display text-lg font-semibold leading-snug text-white transition-colors group-hover:text-brand-soft">
               {p.title}
             </h3>
           </div>

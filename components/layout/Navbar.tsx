@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { ArrowUpRight, Menu, X } from "lucide-react";
 import { waLink } from "@/lib/site";
 
 const NAV = [
@@ -27,10 +27,10 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all ${scrolled || open ? "glass" : ""}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${scrolled || open ? "glass" : ""}`}>
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3">
-          <Image src="/brand/logo.png" alt="Noto G." width={150} height={34} className="h-9 w-auto" priority />
+        <Link href="/" className="brand-logo-window" aria-label="Noto G. - Home">
+          <Image src="/brand/logo.png" alt="Noto G." fill sizes="176px" priority />
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
@@ -38,7 +38,7 @@ export function Navbar() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="rounded-full px-4 py-2 text-sm font-medium tracking-wide text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
+                className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
               >
                 {item.label}
               </Link>
@@ -51,16 +51,17 @@ export function Navbar() {
             href={waLink(`Ciao Noto G! Vorrei prenotare un appuntamento in showroom a Como.`)}
             target="_blank"
             rel="noopener"
-            className="rounded-full bg-brand px-5 py-2.5 text-sm font-semibold text-white shadow-lg shadow-brand/40 transition-transform hover:scale-105"
+            className="button-primary min-h-10 px-4 py-2"
           >
-            Prenota appuntamento
+            Prenota <ArrowUpRight size={15} />
           </a>
         </div>
 
         <button
-          className="rounded-lg p-2 text-slate-200 lg:hidden"
+          className="rounded-md border border-line/70 bg-night/70 p-2 text-slate-200 lg:hidden"
           onClick={() => setOpen(!open)}
-          aria-label="Menu"
+          aria-label={open ? "Chiudi menu" : "Apri menu"}
+          aria-expanded={open}
         >
           {open ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -85,7 +86,7 @@ export function Navbar() {
                 href={waLink(`Ciao Noto G! Vorrei prenotare un appuntamento.`)}
                 target="_blank"
                 rel="noopener"
-                className="block rounded-full bg-brand px-5 py-3 text-center text-sm font-semibold text-white"
+                className="button-primary w-full"
               >
                 Prenota appuntamento
               </a>

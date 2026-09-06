@@ -33,16 +33,16 @@ export default async function VenditaPage() {
   };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
+    <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
       <JsonLd data={ld} />
       <Reveal>
-        <p className="text-xs font-bold uppercase tracking-[0.3em] text-accent-green">Vendita</p>
-        <h1 className="mt-3 font-display text-4xl font-bold text-white sm:text-6xl">
-          Immobili in vendita
+        <p className="section-kicker">Proprietà selezionate</p>
+        <h1 className="mt-4 max-w-4xl font-display text-4xl font-semibold text-white sm:text-6xl">
+          Immobili in vendita a Como e provincia.
         </h1>
-        <p className="mt-4 max-w-2xl text-slate-400">
-          Nuove costruzioni e ristrutturazioni di pregio in Como e provincia. Filtra anche per città,
-          metratura, prezzo o classe energetica e prenota la visita su WhatsApp.
+        <p className="mt-5 max-w-2xl leading-relaxed text-slate-400">
+          Nuove costruzioni e immobili ristrutturati, presentati con informazioni essenziali e
+          contatto diretto. Filtra la selezione e prenota una visita.
         </p>
       </Reveal>
 

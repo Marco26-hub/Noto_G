@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Contatti e prenotazione appuntamento",
   description:
-    "Chiama lo 031 522914 o prenota in WhatsApp. Sed e showroom in Viale Varese 53, Como.",
+    "Chiama lo 031 522914 o invia una richiesta. Sede e showroom in Viale Varese 53, Como.",
   alternates: { canonical: "/contatti" },
 };
 
@@ -35,18 +35,19 @@ export default function ContactPage() {
   return (
     <>
       <JsonLd data={ld} />
-      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+      <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-24">
         <Reveal>
-          <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-soft">Parlaci</p>
-          <h1 className="mt-3 font-display text-5xl font-bold text-white">Contatti</h1>
+          <p className="section-kicker">Parliamo del progetto</p>
+          <h1 className="mt-4 max-w-3xl font-display text-5xl font-semibold text-white sm:text-6xl">Contatti</h1>
           <p className="mt-4 max-w-2xl text-slate-400">
-            Prenota un appuntamento su WhatsApp o vieni a trovarci in sede: siamo qui per te.
+            Raccontaci cosa vuoi costruire, ristrutturare o visitare. Ti rispondiamo con un
+            riferimento diretto e i prossimi passi utili.
           </p>
         </Reveal>
 
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.1fr_1fr]">
           <Reveal>
-            <div className="rounded-2xl border border-line/60 bg-panel/60 p-8">
+            <div className="premium-panel rounded-lg p-6 sm:p-8">
               <h2 className="font-display text-xl font-semibold text-white">Scrivici</h2>
               <p className="mt-2 text-sm text-slate-500">Rispondiamo in orario d’ufficio.</p>
               <div className="mt-6">
@@ -56,7 +57,7 @@ export default function ContactPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="rounded-2xl border border-line/60 bg-panel/60 p-8">
+            <div className="premium-panel rounded-lg p-6 sm:p-8">
               <h2 className="font-display text-xl font-semibold text-white">I nostri riferimenti</h2>
               <ul className="mt-6 space-y-5 text-sm">
                 <li className="flex items-start gap-3">
@@ -78,7 +79,7 @@ export default function ContactPage() {
                   <span className="text-slate-300">{SITE.showroom.hours}</span>
                 </li>
               </ul>
-              <div className="mt-8 overflow-hidden rounded-xl border border-line/60">
+              <div className="mt-8 overflow-hidden rounded-md border border-line/60">
                 <iframe title="Mappa sede" src={SITE.showroom.mapsUrl} className="h-64 w-full" loading="lazy" />
               </div>
             </div>
