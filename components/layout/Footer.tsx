@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/lib/site";
-import { AtSign, Camera, Mail, MapPin, Phone } from "lucide-react";
+import { AtSign, Camera, Lock, Mail, MapPin, Phone } from "lucide-react";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -69,10 +69,18 @@ export function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-line/60 pt-6 text-xs text-slate-500 sm:flex-row">
           <p>© {year} Noto G. S.r.l. — Tutti i diritti riservati.</p>
-          <p className="flex items-center gap-2">
-            <span className="inline-block h-px w-8 bg-brand-soft" />
-            <span>Impresa italiana</span>
-          </p>
+          <div className="flex items-center gap-5">
+            <Link
+              href="/login"
+              className="flex items-center gap-1.5 text-slate-500 transition-colors hover:text-slate-300"
+            >
+              <Lock size={12} /> Area riservata
+            </Link>
+            <p className="flex items-center gap-2">
+              <span className="inline-block h-px w-8 bg-brand-soft" />
+              <span>Impresa italiana</span>
+            </p>
+          </div>
         </div>
       </div>
     </footer>

@@ -60,7 +60,7 @@ export function ContactForm({ propertyRef, propertyTitle }: Props) {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} method="post" className="space-y-4">
       <input name="website" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
       <input name="url" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden />
       <div className="grid gap-4 sm:grid-cols-2">

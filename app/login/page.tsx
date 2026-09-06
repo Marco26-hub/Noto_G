@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { Lock } from "lucide-react";
+import Link from "next/link";
+import { ArrowLeft, Lock } from "lucide-react";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -31,7 +32,11 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-night px-4">
-      <form onSubmit={submit} className="w-full max-w-sm rounded-2xl border border-line bg-panel p-8">
+      <form
+        onSubmit={submit}
+        method="post"
+        className="w-full max-w-sm rounded-2xl border border-line bg-panel p-8"
+      >
         <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand/15 text-brand-soft">
           <Lock size={22} />
         </div>
@@ -53,6 +58,12 @@ export default function LoginPage() {
         >
           {loading ? "Accesso…" : "Accedi"}
         </button>
+        <Link
+          href="/"
+          className="mt-5 flex items-center justify-center gap-1.5 text-xs text-slate-500 transition-colors hover:text-slate-300"
+        >
+          <ArrowLeft size={13} /> Torna al sito
+        </Link>
       </form>
     </div>
   );

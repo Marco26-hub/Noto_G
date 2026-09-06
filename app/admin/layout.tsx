@@ -1,6 +1,6 @@
 import { requireAdmin } from "@/lib/auth";
 import Link from "next/link";
-import { Home, Rss, Inbox } from "lucide-react";
+import { Home, Rss, Inbox, ExternalLink } from "lucide-react";
 import { LogoutButton } from "@/components/admin/LogoutButton";
 
 export const dynamic = "force-dynamic";
@@ -21,7 +21,17 @@ export default async function AdminLayout({ children }: { children: React.ReactN
               <NavLink href="/admin/lead" icon={<Inbox size={15} />} label="Lead" />
             </nav>
           </div>
-          <LogoutButton />
+          <div className="flex items-center gap-2">
+            <Link
+              href="/"
+              target="_blank"
+              rel="noopener"
+              className="flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-sm text-slate-400 hover:bg-white/5 hover:text-white"
+            >
+              <ExternalLink size={14} /> Vai al sito
+            </Link>
+            <LogoutButton />
+          </div>
         </div>
       </header>
       <main className="mx-auto max-w-7xl px-4 py-8">{children}</main>
