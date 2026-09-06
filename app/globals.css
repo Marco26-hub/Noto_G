@@ -149,13 +149,57 @@ html[data-theme="day"] .theme-always-dark .gradient-text {
 .brand-logo-window {
   position: relative;
   display: block;
-  width: 176px;
-  height: 40px;
+  width: 210px;
+  height: 48px;
+  flex-shrink: 0;
   overflow: hidden;
 }
 
 .brand-logo-window img {
   object-fit: cover;
+  object-position: center;
+}
+
+.nav-link {
+  color: #cbd5e1;
+}
+
+.nav-link:hover,
+.nav-link-active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+html[data-theme="day"] .glass .nav-link {
+  color: #273447;
+}
+
+html[data-theme="day"] .glass .nav-link:hover {
+  background: rgba(41, 54, 221, 0.08);
+  color: #1f2bc4;
+}
+
+html[data-theme="day"] .glass .nav-link-active {
+  background: rgba(41, 54, 221, 0.1);
+  box-shadow: inset 0 0 0 1px rgba(41, 54, 221, 0.34);
+  color: #202cc8;
+}
+
+html[data-theme="day"] .nav-over-dark .nav-link {
+  color: #eef2f7;
+}
+
+html[data-theme="day"] .nav-over-dark .nav-link:hover,
+html[data-theme="day"] .nav-over-dark .nav-link-active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
+@media (max-width: 639px) {
+  .brand-logo-window {
+    width: 172px;
+    height: 40px;
+  }
 }
 
 .premium-panel {

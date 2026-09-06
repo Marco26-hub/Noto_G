@@ -21,8 +21,7 @@ export function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const overlaysDarkHero = ["/", "/ristrutturazioni", "/showroom", "/chi-siamo"].includes(pathname);
-  const isOverDarkHero = overlaysDarkHero && !scrolled && !open;
+  const isOverDarkHero = pathname === "/" && !scrolled && !open;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -35,7 +34,7 @@ export function Navbar() {
     <header className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${isOverDarkHero ? "nav-over-dark" : "glass"}`}>
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="brand-logo-window" aria-label="Noto G. - Home">
-          <Image src="/brand/logo.png" alt="Noto G." fill sizes="176px" priority />
+          <Image src="/brand/logo.png" alt="Noto G." fill sizes="(max-width: 639px) 172px, 210px" priority />
         </Link>
 
         <ul className="hidden items-center gap-1 lg:flex">
@@ -43,7 +42,8 @@ export function Navbar() {
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="rounded-md px-3 py-2 text-sm font-medium text-slate-300 transition-colors hover:bg-white/5 hover:text-white"
+                aria-current={pathname === item.href ? "page" : undefined}
+                className={`nav-link rounded-md px-3 py-2 text-sm font-semibold transition-colors ${pathname === item.href ? "nav-link-active" : ""}`}
               >
                 {item.label}
               </Link>

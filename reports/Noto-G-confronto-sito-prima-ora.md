@@ -4,6 +4,8 @@
 
 Data: 6 settembre 2026
 
+![Logo ufficiale Social Web Automation](assets/swa-logo-official.png)
+
 ## Obiettivo
 
 Rinnovare la presenza online di Noto G con un sito piu chiaro, autorevole e semplice da usare, capace di presentare l'azienda, valorizzare immobili e ristrutturazioni e raccogliere richieste reali dai potenziali clienti.
@@ -64,3 +66,11 @@ Le richieste inviate dal sito vengono salvate e restano disponibili nell'area ri
 ## Conclusione
 
 Il nuovo sito presenta Noto G in modo piu solido, attuale e credibile. Le parti principali sono collegate e verificate: pagine pubbliche, immobili, richieste, area riservata e archivio immagini. Dopo il collegamento del dominio, la verifica dei testi legali e l'attivazione degli avvisi email, il sito potra essere promosso come presenza ufficiale dell'azienda.
+
+## Dati del fornitore
+
+- **Social Web Automation di Marco Dibenedetto**
+- Via Giuseppe Verdi 2B, 22072 Cermenate (CO)
+- P.IVA 03786790133 - C.F. DBNMRC80E04C933Q
+- Telefono: +39 347 719 6603 - Email: swsdautomation@gmail.com
+- PEC: dibenedetto.80@pec.it - Sito: https://www.socialautomation.app

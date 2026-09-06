@@ -4,6 +4,8 @@
 
 Data: 6 settembre 2026
 
+![Logo ufficiale Social Web Automation](assets/swa-logo-official.png)
+
 ## Obiettivo
 
 Costruire una presenza social ordinata, riconoscibile e continuativa per Noto G, trasformando lavori, immobili, persone e competenze aziendali in contenuti capaci di attirare attenzione, creare fiducia e generare nuove conversazioni commerciali.
@@ -25,12 +27,11 @@ Pensato per mantenere i canali vivi, curati e coerenti, con una frequenza regola
 
 ### Produzione mensile
 
-- 16 contenuti principali.
-- 8 video brevi.
-- 4 caroselli informativi.
-- 2 post fotografici o grafici.
-- 2 sequenze di Storie.
-- Versioni coordinate per Facebook e Instagram.
+- 16 contenuti per Instagram.
+- 16 contenuti per Facebook.
+- 32 contenuti pubblicati complessivamente ogni mese.
+- Per ogni canale: 8 video brevi, 4 caroselli informativi, 2 post fotografici o grafici e 2 sequenze di Storie.
+- Idee coordinate, con testi e formati adattati alle caratteristiche di Facebook e Instagram.
 
 ### Percorso del mese
 
@@ -45,8 +46,10 @@ Pensato per un'attivita piu intensa, orientata ad ampliare la visibilita e migli
 
 ### Produzione mensile
 
-- 24 contenuti principali.
-- Maggiore presenza settimanale su Facebook e Instagram.
+- 24 contenuti per Instagram.
+- 24 contenuti per Facebook.
+- 48 contenuti pubblicati complessivamente ogni mese.
+- Maggiore presenza settimanale su entrambe le piattaforme.
 - Video brevi, caroselli, post e Storie distribuiti durante il mese.
 - Due proposte creative per i contenuti piu importanti.
 - Una serie ricorrente riconoscibile nel tempo.
@@ -64,7 +67,9 @@ Pensato per un'attivita piu intensa, orientata ad ampliare la visibilita e migli
 
 | Voce | Presenza | Crescita |
 | --- | --- | --- |
-| Contenuti mensili | 16 | 24 |
+| Contenuti Instagram | 16 | 24 |
+| Contenuti Facebook | 16 | 24 |
+| Totale pubblicazioni mensili | 32 | 48 |
 | Facebook e Instagram | Inclusi | Inclusi |
 | Piano editoriale mensile | Incluso | Incluso |
 | Grafica e testi | Inclusi | Inclusi |
@@ -98,3 +103,11 @@ Il pacchetto Presenza e adatto per iniziare con una comunicazione professionale 
 ## Conclusione
 
 Entrambe le proposte permettono a Noto G di presentarsi con maggiore coerenza su Facebook e Instagram. La scelta dipende dal ritmo che l'azienda vuole sostenere e dalla quantita di materiale reale disponibile ogni mese.
+
+## Dati del fornitore
+
+- **Social Web Automation di Marco Dibenedetto**
+- Via Giuseppe Verdi 2B, 22072 Cermenate (CO)
+- P.IVA 03786790133 - C.F. DBNMRC80E04C933Q
+- Telefono: +39 347 719 6603 - Email: swsdautomation@gmail.com
+- PEC: dibenedetto.80@pec.it - Sito: https://www.socialautomation.app
