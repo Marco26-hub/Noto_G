@@ -5,7 +5,7 @@ export const SITE = {
   phone: "031 522914",
   phoneHref: "tel:031522914",
   email: "info@notog.it",
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "393511234567",
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || "",
   showroom: {
     address: "Viale Varese 53, angolo via Borsieri",
     city: "Como",
@@ -23,5 +23,7 @@ export const SITE = {
 };
 
 export function waLink(message: string) {
-  return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
+  return SITE.whatsapp
+    ? `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`
+    : SITE.phoneHref;
 }
