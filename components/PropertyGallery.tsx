@@ -68,7 +68,7 @@ export function PropertyGallery({ images, title }: { images: string[]; title: st
 
       {open && (
         <div
-          className="fixed inset-0 z-90 flex items-center justify-center bg-night/90 backdrop-blur"
+          className="theme-always-dark fixed inset-0 z-90 flex items-center justify-center bg-night/90 backdrop-blur"
           onClick={() => setOpen(false)}
           role="dialog"
           aria-modal="true"

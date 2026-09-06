@@ -10,7 +10,7 @@ export function PropertyCard({ p }: { p: Property }) {
       href={`/vendita/${p.id}`}
       className="premium-panel group relative block overflow-hidden rounded-lg transition-transform duration-300 hover:-translate-y-1"
     >
-      <div className="relative aspect-[4/3] overflow-hidden border-b border-line/60">
+      <div className="theme-always-dark relative aspect-[4/3] overflow-hidden border-b border-line/60">
         <Image
           src={p.images[0] || "/works/lavori2.jpg"}
           alt={p.title}

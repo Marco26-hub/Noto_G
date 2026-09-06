@@ -1,5 +1,5 @@
 import { Mail, MapPin, Phone, Building2 } from "lucide-react";
-import { SITE } from "@/lib/site";
+import { ORGANIZATION_ID, SITE } from "@/lib/site";
 import { Reveal } from "@/components/motion/Reveal";
 import { ContactForm } from "@/components/ContactForm";
 import { JsonLd } from "@/components/JsonLd";
@@ -10,6 +10,12 @@ export const metadata: Metadata = {
   description:
     "Chiama lo 031 522914 o invia una richiesta. Sede e showroom in Viale Varese 53, Como.",
   alternates: { canonical: "/contatti" },
+  openGraph: {
+    title: "Contatti Noto G. a Como",
+    description: "Telefono, email, sede, showroom e modulo per immobili e ristrutturazioni.",
+    url: "/contatti",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Noto G. — Contatti e showroom a Como" }],
+  },
 };
 
 export default function ContactPage() {
@@ -19,16 +25,7 @@ export default function ContactPage() {
     name: "Contatti Noto G.",
     url: `${SITE.base}/contatti`,
     mainEntity: {
-      "@type": "Organization",
-      name: SITE.name,
-      telephone: SITE.phone,
-      email: SITE.email,
-      address: {
-        "@type": "PostalAddress",
-        streetAddress: SITE.showroom.address,
-        postalCode: SITE.showroom.cap,
-        addressLocality: SITE.showroom.city,
-      },
+      "@id": ORGANIZATION_ID,
     },
   };
 

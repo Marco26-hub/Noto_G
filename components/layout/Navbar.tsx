@@ -3,8 +3,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import { waLink } from "@/lib/site";
+import { ThemeToggle } from "@/components/layout/ThemeToggle";
 
 const NAV = [
   { href: "/", label: "Home" },
@@ -16,8 +18,11 @@ const NAV = [
 ];
 
 export function Navbar() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const overlaysDarkHero = ["/", "/ristrutturazioni", "/showroom", "/chi-siamo"].includes(pathname);
+  const isOverDarkHero = overlaysDarkHero && !scrolled && !open;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -27,7 +32,7 @@ export function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${scrolled || open ? "glass" : ""}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 ${isOverDarkHero ? "nav-over-dark" : "glass"}`}>
       <nav className="mx-auto flex h-18 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="brand-logo-window" aria-label="Noto G. - Home">
           <Image src="/brand/logo.png" alt="Noto G." fill sizes="176px" priority />
@@ -47,6 +52,7 @@ export function Navbar() {
         </ul>
 
         <div className="hidden items-center gap-3 lg:flex">
+          <ThemeToggle />
           <a
             href={waLink(`Ciao Noto G! Vorrei prenotare un appuntamento in showroom a Como.`)}
             target="_blank"
@@ -57,14 +63,17 @@ export function Navbar() {
           </a>
         </div>
 
-        <button
-          className="rounded-md border border-line/70 bg-night/70 p-2 text-slate-200 lg:hidden"
-          onClick={() => setOpen(!open)}
-          aria-label={open ? "Chiudi menu" : "Apri menu"}
-          aria-expanded={open}
-        >
-          {open ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden">
+          <ThemeToggle />
+          <button
+            className="rounded-md border border-line/70 bg-night/70 p-2 text-slate-200"
+            onClick={() => setOpen(!open)}
+            aria-label={open ? "Chiudi menu" : "Apri menu"}
+            aria-expanded={open}
+          >
+            {open ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </nav>
 
       {open && (

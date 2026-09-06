@@ -2,6 +2,12 @@ import { requireAdmin } from "@/lib/auth";
 import Link from "next/link";
 import { Home, Rss, Inbox, ExternalLink } from "lucide-react";
 import { LogoutButton } from "@/components/admin/LogoutButton";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Pannello amministrativo",
+  robots: { index: false, follow: false, noarchive: true },
+};
 
 export const dynamic = "force-dynamic";
 

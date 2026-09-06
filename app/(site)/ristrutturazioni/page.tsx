@@ -1,6 +1,7 @@
-import { CheckCircle2, Hammer, CalendarClock } from "lucide-react";
+import { CheckCircle2, Hammer, CalendarClock, ArrowRight } from "lucide-react";
 import Image from "next/image";
-import { SITE, waLink } from "@/lib/site";
+import Link from "next/link";
+import { ORGANIZATION_ID, SITE, WEBSITE_ID, waLink } from "@/lib/site";
 import { Reveal } from "@/components/motion/Reveal";
 import { JsonLd } from "@/components/JsonLd";
 import type { Metadata } from "next";
@@ -8,8 +9,14 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Ristrutturazioni chiavi in mano a Como",
   description:
-    "Ristrutturazioni civili e industriali a Como: riqualificazione energetica, consolidamenti strutturali, preventivi gratuiti.",
+    "Ristrutturazioni chiavi in mano a Como per appartamenti, ville e spazi professionali: progetto, pratiche, cantiere, impianti e finiture.",
   alternates: { canonical: "/ristrutturazioni" },
+  openGraph: {
+    title: "Ristrutturazioni chiavi in mano a Como",
+    description: "Un solo referente per progetto, pratiche, cantiere, impianti e finiture.",
+    url: "/ristrutturazioni",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Noto G. — Costruzioni e ristrutturazioni a Como" }],
+  },
 };
 
 const STEPS = [
@@ -20,7 +27,7 @@ const STEPS = [
 ];
 
 const FEATURES = [
-  "Riqualificazioni energetiche con bonus e detrazioni",
+  "Riqualificazione energetica e documentazione tecnica",
   "Recupero e consolidamenti strutturali",
   "Adeguamenti funzionali e impianti",
   "Cappotto, finestrature, impermeabilizzazioni",
@@ -28,21 +35,50 @@ const FEATURES = [
   "Gestione completa pratiche e direzione lavori",
 ];
 
+const FAQ = [
+  {
+    q: "Quanto dura una ristrutturazione?",
+    a: "Dipende da superficie, stato dell'immobile, opere strutturali e autorizzazioni. Dopo sopralluogo e progetto definiamo fasi, priorità e un cronoprogramma coerente con l'intervento.",
+  },
+  {
+    q: "Posso accedere alle agevolazioni edilizie?",
+    a: "La possibilità dipende dall'intervento, dall'immobile e dalla normativa vigente. Possiamo coordinare la documentazione tecnica necessaria; la verifica fiscale va fatta con il proprio consulente.",
+  },
+  {
+    q: "Gestite anche impianti e scelta dei materiali?",
+    a: "Sì. Coordiniamo opere edili, impianti, serramenti, pavimenti e finiture. Lo showroom di Como permette di confrontare materiali e soluzioni in continuità con il progetto.",
+  },
+];
+
 export default function RistrutturazioniPage() {
-  const ld = {
-    "@context": "https://schema.org",
-    "@type": "Service",
-    name: "Ristrutturazioni civili e industriali",
-    provider: { "@type": "Organization", name: SITE.name },
-    areaServed: "Como e provincia",
-    serviceType: "Costruzioni e ristrutturazioni",
-    url: `${SITE.base}/ristrutturazioni`,
-  };
+  const ld = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "@id": `${SITE.base}/ristrutturazioni#servizio`,
+      name: "Ristrutturazioni chiavi in mano a Como",
+      description: metadata.description,
+      provider: { "@id": ORGANIZATION_ID },
+      areaServed: { "@type": "AdministrativeArea", name: SITE.areaServed },
+      serviceType: "Ristrutturazioni civili e industriali chiavi in mano",
+      url: `${SITE.base}/ristrutturazioni`,
+      isPartOf: { "@id": WEBSITE_ID },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: FAQ.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: item.a },
+      })),
+    },
+  ];
 
   return (
     <>
       <JsonLd data={ld} />
-      <section className="relative min-h-[62svh] overflow-hidden border-b border-line/60">
+      <section className="theme-always-dark relative min-h-[62svh] overflow-hidden border-b border-line/60">
         <Image src="/uploads/demo/reno1.jpg" alt="Ristrutturazioni Noto G" fill priority className="object-cover opacity-60 [filter:saturate(.7)_contrast(1.08)]" />
         <div className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/60 to-night/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-night via-transparent to-night/25" />
@@ -55,13 +91,13 @@ export default function RistrutturazioniPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mt-5 max-w-3xl font-display text-5xl font-semibold leading-[1.08] text-white sm:text-6xl">
-              Un processo chiaro. Un solo referente.
+              Ristrutturazioni chiavi in mano a Como.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mt-5 max-w-2xl text-lg text-slate-300">
-              Seguiamo sopralluogo, progetto, pratiche, cantiere e finiture con responsabilità
-              diretta, attenzione ai tempi e rispetto delle norme.
+              Un solo referente per sopralluogo, progetto, pratiche, cantiere, impianti e
+              finiture. Ogni fase viene coordinata con responsabilità diretta.
             </p>
           </Reveal>
           </div>
@@ -69,6 +105,36 @@ export default function RistrutturazioniPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+        <Reveal>
+          <p className="section-kicker">Ambiti di intervento</p>
+          <h2 className="mt-4 max-w-4xl font-display text-4xl font-semibold text-white">
+            Case, condomini e spazi professionali a Como e provincia.
+          </h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-slate-400">
+            Interveniamo su appartamenti, ville, edifici condominiali e immobili commerciali,
+            dalle opere interne alla riqualificazione completa. Il progetto definisce priorità,
+            lavorazioni e finiture prima dell&rsquo;apertura del cantiere.
+          </p>
+        </Reveal>
+        <div className="mt-10 grid gap-8 border-t border-line/70 pt-8 md:grid-cols-3">
+          {[
+            ["Ridistribuzione degli spazi", "Demolizioni, nuove partizioni, adeguamenti funzionali e coordinamento degli impianti."],
+            ["Involucro e prestazioni", "Cappotti, serramenti, impermeabilizzazioni e interventi di riqualificazione energetica."],
+            ["Interni e finiture", "Pavimenti, rivestimenti, bagni, cucine e materiali coordinati con il progetto."],
+          ].map(([title, text]) => (
+            <div key={title}>
+              <h3 className="font-display text-xl font-semibold text-white">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-400">{text}</p>
+            </div>
+          ))}
+        </div>
+        <Link href="/showroom" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-soft hover:text-white">
+          Scopri lo showroom di Como <ArrowRight size={16} />
+        </Link>
+      </section>
+
+      <section className="border-t border-line/60 bg-ink/50">
+        <div className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
         <Reveal>
           <p className="section-kicker">Il metodo</p>
           <h2 className="mt-4 font-display text-4xl font-semibold text-white">Come lavoriamo</h2>
@@ -83,6 +149,7 @@ export default function RistrutturazioniPage() {
               </div>
             </Reveal>
           ))}
+        </div>
         </div>
       </section>
 
@@ -128,11 +195,7 @@ export default function RistrutturazioniPage() {
           <h2 className="mt-4 font-display text-4xl font-semibold text-white">FAQ ristrutturazioni</h2>
         </Reveal>
         <div className="mt-10 space-y-4">
-          {[
-            { q: "Quanto dura in media una ristrutturazione?", a: "In genere dalle 6 alle 12 settimane per un appartamento, con fasi critiche definite in cronoprogramma. Le riqualificazioni energetiche complete possono richiedere più tempo, soprattutto quando includono pratiche tecniche e autorizzazioni." },
-            { q: "Posso accedere ai bonus edilizi?", a: "Sì. Ti assistiamo nella verifica dei bonus attivi per riqualificazione energetica, ristrutturazione e interventi strutturali, preparando la documentazione necessaria." },
-            { q: "Gestite anche impianti e materiali?", a: "Sì: lavoriamo con tecnologie all’avanguardia e gestiamo in autonomia impianti, finestrature, cappotto, pavimenti e finiture, anche di design." },
-          ].map((f, i) => (
+          {FAQ.map((f, i) => (
             <Reveal key={f.q} delay={0.05 * i}>
               <details className="premium-panel rounded-lg px-6 py-5">
                 <summary className="cursor-pointer font-display text-base font-semibold text-white">{f.q}</summary>

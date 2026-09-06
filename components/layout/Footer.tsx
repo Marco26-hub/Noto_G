@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import { SITE } from "@/lib/site";
-import { AtSign, Camera, Lock, Mail, MapPin, Phone } from "lucide-react";
+import { Lock, Mail, MapPin, Phone } from "lucide-react";
+import { FacebookIcon, InstagramIcon } from "@/components/icons/SocialIcons";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -16,12 +17,14 @@ export function Footer() {
             <p className="mt-4 max-w-xs text-sm text-slate-400">
               Costruzioni, ristrutturazioni e immobili a Como. Esperienza di cantiere dal {SITE.since}.
             </p>
-            <div className="mt-4 flex gap-3">
-              <a href={SITE.social.facebook} target="_blank" rel="noopener" aria-label="Facebook" className="rounded-md border border-line/70 p-2 text-slate-300 transition-colors hover:border-brand-soft hover:text-white">
-                <AtSign size={18} />
+            <div className="mt-5 flex flex-wrap gap-2">
+              <a href={SITE.social.facebook} target="_blank" rel="noopener noreferrer" aria-label="Noto G. su Facebook" className="social-link social-facebook">
+                <FacebookIcon className="h-4 w-4" />
+                <span>Facebook</span>
               </a>
-              <a href={SITE.social.instagram} target="_blank" rel="noopener" aria-label="Instagram" className="rounded-md border border-line/70 p-2 text-slate-300 transition-colors hover:border-brand-soft hover:text-white">
-                <Camera size={18} />
+              <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" aria-label="Noto G. su Instagram" className="social-link social-instagram">
+                <InstagramIcon className="h-4 w-4" />
+                <span>Instagram</span>
               </a>
             </div>
           </div>

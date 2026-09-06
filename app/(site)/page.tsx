@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight, Building2, Hammer, MapPin, Phone, ShieldCheck } from "lucide-react";
 import { getPublicProperties } from "@/lib/db";
-import { SITE, waLink } from "@/lib/site";
+import { ORGANIZATION_ID, SITE, WEBSITE_ID, waLink } from "@/lib/site";
 import { Reveal } from "@/components/motion/Reveal";
 import { PropertyCard } from "@/components/PropertyCard";
 import { JsonLd } from "@/components/JsonLd";
@@ -50,11 +50,26 @@ export default async function HomePage() {
   const homeLd = [
     {
       "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": WEBSITE_ID,
+      name: SITE.shortName,
+      alternateName: "Noto G Costruzioni",
+      url: SITE.base,
+      publisher: { "@id": ORGANIZATION_ID },
+      inLanguage: "it-IT",
+    },
+    {
+      "@context": "https://schema.org",
       "@type": "WebPage",
+      "@id": `${SITE.base}/#home`,
       name: "Noto G. — Costruzioni e Ristrutturazioni a Como",
       description:
         "Impresa edile familiare dal 1990: vendita immobili, ristrutturazioni chiavi in mano e showroom a Como.",
       url: SITE.base,
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": ORGANIZATION_ID },
+      primaryImageOfPage: `${SITE.base}/works/drone.jpg`,
+      inLanguage: "it-IT",
     },
     {
       "@context": "https://schema.org",
@@ -72,7 +87,7 @@ export default async function HomePage() {
       <JsonLd data={homeLd} />
 
       {/* HERO */}
-      <section className="relative -mt-18 flex min-h-[82svh] items-end overflow-hidden border-b border-line/60">
+      <section className="theme-always-dark relative -mt-18 flex min-h-[82svh] items-end overflow-hidden border-b border-line/60">
         <div className="absolute inset-0">
           <Image
             src="/works/drone.jpg"

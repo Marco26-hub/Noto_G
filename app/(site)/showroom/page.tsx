@@ -1,6 +1,7 @@
 import Image from "next/image";
-import { CalendarClock, MapPin, Phone } from "lucide-react";
-import { SITE, waLink } from "@/lib/site";
+import { ArrowRight, CalendarClock, MapPin, Phone } from "lucide-react";
+import Link from "next/link";
+import { ORGANIZATION_ID, SITE, waLink } from "@/lib/site";
 import { Reveal } from "@/components/motion/Reveal";
 import { JsonLd } from "@/components/JsonLd";
 import type { Metadata } from "next";
@@ -8,21 +9,34 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Showroom Noto G. a Como",
   description:
-    "In Viale Varese 53, Como: lo showroom Noto G. con finiture, cucine, rivestimenti e supporto tecnico per la tua ristrutturazione.",
+    "Showroom materiali e finiture a Como, in Viale Varese 53: pavimenti, rivestimenti, bagni, cucine e supporto tecnico per il progetto.",
   alternates: { canonical: "/showroom" },
+  openGraph: {
+    title: "Showroom materiali e finiture a Como",
+    description: "Confronta dal vivo materiali e soluzioni insieme al team Noto G.",
+    url: "/showroom",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Noto G. — Showroom a Como" }],
+  },
 };
 
 export default function ShowroomPage() {
   const ld = {
     "@context": "https://schema.org",
     "@type": "Place",
+    "@id": `${SITE.base}/showroom#luogo`,
     name: "Showroom Noto G. Como",
+    description: metadata.description,
+    image: [`${SITE.base}/uploads/demo/showroom1.jpg`, `${SITE.base}/uploads/demo/showroom2.jpg`],
+    telephone: SITE.phone,
     address: {
       "@type": "PostalAddress",
-      streetAddress: SITE.showroom.address,
+      streetAddress: SITE.showroom.streetAddress,
       postalCode: SITE.showroom.cap,
       addressLocality: SITE.showroom.city,
+      addressRegion: "CO",
+      addressCountry: "IT",
     },
+    containedInPlace: { "@id": ORGANIZATION_ID },
     url: `${SITE.base}/showroom`,
   };
 
@@ -31,7 +45,7 @@ export default function ShowroomPage() {
   return (
     <>
       <JsonLd data={ld} />
-      <section className="relative min-h-[62svh] overflow-hidden border-b border-line/60">
+      <section className="theme-always-dark relative min-h-[62svh] overflow-hidden border-b border-line/60">
         <Image src="/uploads/demo/showroom1.jpg" alt="Interno showroom Noto G" fill priority className="object-cover opacity-65 [filter:saturate(.76)_contrast(1.05)]" />
         <div className="absolute inset-0 bg-gradient-to-r from-night/95 via-night/60 to-night/20" />
         <div className="absolute inset-0 bg-gradient-to-t from-night via-transparent to-night/25" />
@@ -44,7 +58,7 @@ export default function ShowroomPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mt-5 max-w-3xl font-display text-5xl font-semibold leading-[1.08] text-white sm:text-6xl">
-              Le finiture si scelgono dal vivo.
+              Showroom materiali e finiture a Como.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
@@ -58,7 +72,33 @@ export default function ShowroomPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr]">
+        <Reveal>
+          <p className="section-kicker">Scelte coordinate</p>
+          <h2 className="mt-4 max-w-4xl font-display text-4xl font-semibold text-white">
+            Materiali da confrontare, decisioni da prendere con metodo.
+          </h2>
+          <p className="mt-4 max-w-3xl leading-relaxed text-slate-400">
+            Lo showroom collega le scelte estetiche alle esigenze tecniche del cantiere. Puoi
+            valutare abbinamenti, superfici e soluzioni insieme a chi seguirà il progetto.
+          </p>
+        </Reveal>
+        <div className="mt-10 grid gap-8 border-t border-line/70 pt-8 md:grid-cols-3">
+          {[
+            ["Pavimenti e rivestimenti", "Formati, superfici e abbinamenti per ambienti interni ed esterni."],
+            ["Bagni e cucine", "Soluzioni funzionali, materiali e finiture coordinate con gli impianti."],
+            ["Serramenti e dettagli", "Elementi tecnici e finiture da integrare nel progetto complessivo."],
+          ].map(([title, text]) => (
+            <div key={title}>
+              <h3 className="font-display text-xl font-semibold text-white">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-400">{text}</p>
+            </div>
+          ))}
+        </div>
+        <Link href="/ristrutturazioni" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-soft hover:text-white">
+          Dal materiale al cantiere chiavi in mano <ArrowRight size={16} />
+        </Link>
+
+        <div className="mt-16 grid gap-12 lg:grid-cols-[1.2fr_1fr]">
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div className="media-frame relative aspect-[4/3] overflow-hidden">

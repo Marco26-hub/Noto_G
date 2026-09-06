@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Bath, BedDouble, Building2, Mail, MapPin, MessageCircle, Ruler, ShieldCheck, Zap } from "lucide-react";
 import { getProperties, getProperty } from "@/lib/db";
-import { SITE, waLink } from "@/lib/site";
+import { ORGANIZATION_ID, SITE, WEBSITE_ID, waLink } from "@/lib/site";
 import { energyColor, formatPrice, statusLabel } from "@/lib/format";
 import { PropertyGallery } from "@/components/PropertyGallery";
 import { PropertyCard } from "@/components/PropertyCard";
@@ -26,11 +26,26 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { id } = await props.params;
   const p = await getProperty(id);
-  if (!p) return { title: "Immobile non trovato" };
+  if (!p || p.status === "venduto") {
+    return { title: "Immobile non trovato", robots: { index: false, follow: false } };
+  }
+  const description = p.description.replace(/\s+/g, " ").slice(0, 155);
   return {
     title: `${p.title} — ${p.city} · ${p.reference}`,
-    description: p.description.slice(0, 160),
+    description,
     alternates: { canonical: `/vendita/${p.id}` },
+    openGraph: {
+      title: `${p.title} — ${p.city}`,
+      description,
+      url: `/vendita/${p.id}`,
+      images: [{ url: p.images[0] || "/works/drone.jpg", alt: p.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${p.title} — ${p.city}`,
+      description,
+      images: [p.images[0] || "/works/drone.jpg"],
+    },
   };
 }
 
@@ -43,12 +58,12 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
     .filter((x) => x.id !== p.id && x.status !== "venduto")
     .slice(0, 3);
 
-  const ld = {
-    "@context": "https://schema.org",
+  const propertyUrl = `${SITE.base}/vendita/${p.id}`;
+  const residence = {
     "@type": "Residence",
     name: p.title,
     description: p.description,
-    url: `${SITE.base}/vendita/${p.id}`,
+    url: propertyUrl,
     image: p.images.map((i) => (i.startsWith("http") ? i : `${SITE.base}${i}`)),
     address: {
       "@type": "PostalAddress",
@@ -62,6 +77,42 @@ export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) 
         ? { "@type": "GeoCoordinates", latitude: p.latitude, longitude: p.longitude }
         : undefined,
   };
+  const ld = [
+    {
+      "@context": "https://schema.org",
+      "@type": "RealEstateListing",
+      "@id": `${propertyUrl}#annuncio`,
+      name: p.title,
+      description: p.description,
+      url: propertyUrl,
+      datePosted: p.createdAt,
+      dateModified: p.updatedAt,
+      image: residence.image,
+      isPartOf: { "@id": WEBSITE_ID },
+      about: residence,
+      offers: {
+        "@type": "Offer",
+        price: p.price,
+        priceCurrency: "EUR",
+        availability:
+          p.status === "disponibile"
+            ? "https://schema.org/InStock"
+            : "https://schema.org/LimitedAvailability",
+        url: propertyUrl,
+        seller: { "@id": ORGANIZATION_ID },
+        itemOffered: residence,
+      },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Home", item: SITE.base },
+        { "@type": "ListItem", position: 2, name: "Immobili in vendita", item: `${SITE.base}/vendita` },
+        { "@type": "ListItem", position: 3, name: p.title, item: propertyUrl },
+      ],
+    },
+  ];
 
   const waMessage = `Ciao Noto G! Mi piace l'immobile rif. ${p.reference} "${p.title}" a ${p.city} (${formatPrice(p.price)}). Vorrei prenotare una visita.`;
 
