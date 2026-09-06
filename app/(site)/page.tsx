@@ -35,8 +35,8 @@ const FAQ = [
   },
 ];
 
-export default function HomePage() {
-  const properties = getPublicProperties();
+export default async function HomePage() {
+  const properties = await getPublicProperties();
   const featured = properties.filter((p) => p.featured).slice(0, 3);
 
   const homeLd = [

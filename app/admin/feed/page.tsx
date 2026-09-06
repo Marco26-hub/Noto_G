@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 
 export default async function FeedPage() {
   const key = feedKey();
-  const total = getProperties().filter((p) => p.status !== "venduto").length;
+  const total = (await getProperties()).filter((p) => p.status !== "venduto").length;
   const base = SITE.base;
 
   const feeds = [
@@ -36,7 +36,7 @@ export default async function FeedPage() {
     <div className="max-w-3xl">
       <h1 className="font-display text-2xl font-bold text-white">Feed per i portali</h1>
       <p className="mt-1 text-sm text-slate-500">
-        {total} annunci disponibili nei feed. Incolla l'URL nel back-office del portale oppure scarica il file e caricalo a mano.
+        {total} annunci disponibili nei feed. Incolla l&apos;URL nel back-office del portale oppure scarica il file e caricalo a mano.
       </p>
 
       <div className="mt-8 space-y-4">

@@ -35,7 +35,7 @@ export default function ChiSiamoPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mt-5 max-w-3xl font-display text-5xl font-bold text-white">
-              Un'impresa a conduzione familiare, da Giacomo a Giuseppe, Giovanni e Giada.
+              Un&apos;impresa a conduzione familiare, da Giacomo a Giuseppe, Giovanni e Giada.
             </h1>
           </Reveal>
           <Reveal delay={0.2}>
@@ -60,7 +60,7 @@ export default function ChiSiamoPage() {
               </p>
               <p>
                 Investimenti costanti nelle migliori attrezzature e qualità dei materiali hanno
-                permesso alla Noto G. di essere un'azienda fortemente strutturata e
+                permesso alla Noto G. di essere un&apos;azienda fortemente strutturata e
                 basata su solide fondamenta.
               </p>
             </div>

@@ -47,7 +47,7 @@
     "id": "seed-albavilla",
     "reference": "AV-12",
     "title": "Villette a schiera in Albavilla",
-    "description": "Nuove residenze in opportunita di Albavilla: villette a schiera su tre piani con giardino privato. Su unificazione: ingresso, soggiorno, cucina a vista; 3 camere al piano superiore; sala hobby al piano interrato. Giardino di 196 mq con tetto esterno/garage. Design moderno e finiture di pregio.",
+    "description": "Nuove residenze ad Albavilla: villette a schiera su tre piani con giardino privato. Ingresso su soggiorno con cucina a vista, tre camere al piano superiore e sala hobby al piano interrato. Giardino di 196 mq, garage e finiture moderne di pregio.",
     "propertyType": "Villetta a schiera",
     "contract": "vendita",
     "price": 379000,
@@ -73,10 +73,9 @@
       "Garage",
       "Hobby room",
       "Terrazzo",
-      "Parete frontale racchiusa privata"
+      "Ingresso indipendente"
     ],
     "images": [
-      "/uploads/demo/apt2a.jpg",
       "/uploads/demo/apt2b.jpg",
       "/uploads/demo/showroom1.jpg"
     ],
@@ -87,7 +86,7 @@
     "id": "seed-como-lago",
     "reference": "CL-03",
     "title": "Loft vista lago a San Fermo",
-    "description": "Vista al lago di Como: loft ristrutturato alla zona di San Fermo de Medio. Open space con cucinotto separabile, 1 bagno, ampio living con vista sul lago a nord e terrazze di primo piano. Indicato anche per affitto a canone vista la zona turistica. Parterre esterno privato con tacitazione di dimottava situata al piano terra.",
+    "description": "Loft ristrutturato nella zona di San Fermo, con vista sul lago di Como. Open space luminoso con cucinotto separabile, bagno, ampio living e terrazza. Soluzione adatta anche a investimento, grazie alla posizione comoda e richiesta.",
     "propertyType": "Loft",
     "contract": "vendita",
     "price": 319000,
@@ -126,7 +125,7 @@
     "id": "seed-cernobbio",
     "reference": "CE-07",
     "title": "Trilocale ristrutturato a Cernobbio",
-    "description": "A Cernobbio, da riferimento storico di Noto G., trilocale completamente ristrutturato. Appartamento in contesto signorile: ingresso su soggiorno, cucina a vista, due camere e due bagni. Con sistemato spazio esterno con barbecue, amministrazione completamente rinnovata, parete frontale racchiusa privata inesclusa nei punti di enthemaen.",
+    "description": "A Cernobbio, in contesto signorile, trilocale completamente ristrutturato da Noto G. Ingresso su soggiorno con cucina a vista, due camere, due bagni e spazio esterno attrezzabile. Finiture contemporanee, impianti rinnovati e ambienti pronti da abitare.",
     "propertyType": "Appartamento",
     "contract": "vendita",
     "price": 289000,
@@ -150,7 +149,7 @@
       "Contesto signorile",
       "Barbecue esterno",
       "Classe B",
-      "Parete frontale racchiusa privata"
+      "Spazio esterno"
     ],
     "images": [
       "/uploads/demo/apt4a.jpg",
@@ -163,7 +162,7 @@
     "id": "seed-como-centro",
     "reference": "CC-01",
     "title": "Bilocale in Centro Storico ristrutturato",
-    "description": "Nel cuore del Centro Storico e peccrais la piazza delle - bilocale completamente ristrutturato da Noto G. Sotto amministrazione: cucinotto a vista su soggiorno, cameretta, doppio affaccio a nord e sud. Appartamento in contesto originario della zona turistica, con tacitazione al primo piano di dimottava zona turistica.",
+    "description": "Nel cuore del Centro Storico, bilocale completamente ristrutturato da Noto G. Zona giorno con cucinotto a vista, camera, bagno e doppio affaccio nord-sud. Appartamento in contesto storico, ideale come abitazione o investimento in una delle aree più richieste di Como.",
     "propertyType": "Bilocale",
     "contract": "vendita",
     "price": 198000,
@@ -199,7 +198,7 @@
     "id": "seed-brunate",
     "reference": "BR-09",
     "title": "Casa indipendente con giardino",
-    "description": "A Brunate, casa indipendente con giardino privato in zona residenziale. Sistemazione genere: ingresso, soggiorno, cucina a vista, 2 camere, bagno e garage. Germano anche un secondo ingresso indipendente. Spazio esterno e possibilita di rendere la casa tutto differato.",
+    "description": "A Brunate, casa indipendente con ampio giardino privato in zona residenziale. Ingresso, soggiorno, cucina a vista, due camere, bagno e garage. Secondo ingresso indipendente e spazi esterni generosi, con possibilità di personalizzare la distribuzione interna.",
     "propertyType": "Casa indipendente",
     "contract": "vendita",
     "price": 485000,

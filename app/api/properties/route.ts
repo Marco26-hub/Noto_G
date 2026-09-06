@@ -5,7 +5,7 @@ import type { Property } from "@/lib/types";
 
 export async function GET() {
   if (!(await isAuthenticated())) return NextResponse.json({ ok: false }, { status: 401 });
-  return NextResponse.json(getProperties());
+  return NextResponse.json(await getProperties());
 }
 
 export async function POST(req: Request) {
@@ -49,6 +49,6 @@ export async function POST(req: Request) {
     createdAt: now,
     updatedAt: now,
   };
-  upsertProperty(prop);
+  await upsertProperty(prop);
   return NextResponse.json(prop, { status: 201 });
 }

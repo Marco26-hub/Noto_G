@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { SITE, waLink } from "@/lib/site";
+import { waLink } from "@/lib/site";
 import { MessageCircle } from "lucide-react";
 
 export function WhatsAppFab() {

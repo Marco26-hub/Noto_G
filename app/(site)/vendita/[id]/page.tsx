@@ -15,7 +15,7 @@ export async function generateMetadata(
   props: PageProps<"/vendita/[id]">
 ): Promise<Metadata> {
   const { id } = await props.params;
-  const p = getProperty(id);
+  const p = await getProperty(id);
   if (!p) return { title: "Immobile non trovato" };
   return {
     title: `${p.title} — ${p.city} · ${p.reference}`,
@@ -26,10 +26,10 @@ export async function generateMetadata(
 
 export default async function PropertyDetail(props: PageProps<"/vendita/[id]">) {
   const { id } = await props.params;
-  const p = getProperty(id);
+  const p = await getProperty(id);
   if (!p || p.status === "venduto") return notFound();
 
-  const others = getProperties()
+  const others = (await getProperties())
     .filter((x) => x.id !== p.id && x.status !== "venduto")
     .slice(0, 3);
 

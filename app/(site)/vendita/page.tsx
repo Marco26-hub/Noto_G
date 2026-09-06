@@ -14,8 +14,8 @@ export const metadata: Metadata = {
   alternates: { canonical: "/vendita" },
 };
 
-export default function VenditaPage() {
-  const properties = getPublicProperties();
+export default async function VenditaPage() {
+  const properties = await getPublicProperties();
   const ld = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -41,7 +41,7 @@ export default function VenditaPage() {
           Immobili in vendita
         </h1>
         <p className="mt-4 max-w-2xl text-slate-400">
-          Nuove costruzioni e ristrutturazioni di pregio in Como e provincia. Fili anche per città,
+          Nuove costruzioni e ristrutturazioni di pregio in Como e provincia. Filtra anche per città,
           metratura, prezzo o classe energetica e prenota la visita su WhatsApp.
         </p>
       </Reveal>

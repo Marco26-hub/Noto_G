@@ -2,13 +2,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { getProperties } from "@/lib/db";
 import { formatPrice, statusLabel } from "@/lib/format";
-import { Plus, Pencil, Trash2 } from "lucide-react";
+import { Plus, Pencil } from "lucide-react";
 import { DeleteButton } from "@/components/admin/DeleteButton";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminDashboard() {
-  const props = getProperties();
+  const props = await getProperties();
 
   return (
     <div>

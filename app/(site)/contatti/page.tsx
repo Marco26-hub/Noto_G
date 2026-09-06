@@ -40,7 +40,7 @@ export default function ContactPage() {
           <p className="text-xs font-bold uppercase tracking-[0.3em] text-brand-soft">Parlaci</p>
           <h1 className="mt-3 font-display text-5xl font-bold text-white">Contatti</h1>
           <p className="mt-4 max-w-2xl text-slate-400">
-            Prenoti un appuntamento su WhatsApp o lì compìa in sede: siamo qui per te.
+            Prenota un appuntamento su WhatsApp o vieni a trovarci in sede: siamo qui per te.
           </p>
         </Reveal>
 

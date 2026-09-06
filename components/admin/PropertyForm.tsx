@@ -6,6 +6,7 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight, Star, Trash2, Upload } from "lucide-react";
 import type { Property } from "@/lib/types";
 import { ENERGY_CLASSES } from "@/lib/format";
+import { upload } from "@vercel/blob/client";
 
 const TYPES = ["Appartamento", "Attico", "Loft", "Bilocale", "Trilocale", "Quadrilocale", "Villa", "Villetta a schiera", "Casa indipendente", "Rustico", "Box/Garage", "Ufficio", "Negozio", "Terreno"];
 const CONDITIONS = ["Nuova costruzione", "Ristrutturata", "Da ristrutturare", "Buone condizioni"];
@@ -46,16 +47,26 @@ export function PropertyForm({ initial }: { initial?: Property }) {
   async function uploadFiles(files: FileList | null) {
     if (!files?.length) return;
     setUploading(true);
-    const fd = new FormData();
-    Array.from(files).forEach((f) => fd.append("files", f));
-    const res = await fetch("/api/upload", { method: "POST", body: fd });
-    setUploading(false);
-    if (!res.ok) {
-      setError("Upload fallito");
-      return;
+    setError("");
+    try {
+      const blobs = await Promise.all(
+        Array.from(files).map((file) =>
+          upload(`properties/${file.name}`, file, {
+            access: "public",
+            handleUploadUrl: "/api/upload",
+            multipart: file.size > 4 * 1024 * 1024,
+          })
+        )
+      );
+      setForm((current) => ({
+        ...current,
+        images: [...(current.images ?? []), ...blobs.map((blob) => blob.url)],
+      }));
+    } catch {
+      setError("Upload fallito. Usa JPG, PNG, WebP o AVIF fino a 10 MB.");
+    } finally {
+      setUploading(false);
     }
-    const { urls } = (await res.json()) as { urls: string[] };
-    setForm((f) => ({ ...f, images: [...(f.images ?? []), ...urls] }));
   }
 
   function moveImage(i: number, dir: -1 | 1) {
@@ -265,7 +276,7 @@ export function PropertyForm({ initial }: { initial?: Property }) {
 
       <section className="rounded-2xl border border-line bg-panel/60 p-6">
         <h2 className="font-display text-lg font-semibold text-white">Foto</h2>
-        <p className="text-xs text-slate-500">La prima foto diventa la copertina dell'annuncio.</p>
+        <p className="text-xs text-slate-500">La prima foto diventa la copertina dell&apos;annuncio.</p>
         <label className="mt-4 flex cursor-pointer items-center justify-center gap-2 rounded-xl border-2 border-dashed border-line px-4 py-8 text-sm text-slate-400 hover:border-brand hover:text-brand-soft">
           <Upload size={18} /> {uploading ? "Caricamento…" : "Carica foto (JPG, PNG, WebP — max 10 MB)"}
           <input type="file" multiple accept="image/*" className="hidden" onChange={(e) => uploadFiles(e.target.files)} disabled={uploading} />

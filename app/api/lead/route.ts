@@ -18,6 +18,6 @@ export async function POST(req: Request) {
     message: body.message.slice(0, 4000),
     createdAt: new Date().toISOString(),
   };
-  addLead(lead);
+  await addLead(lead);
   return NextResponse.json({ ok: true });
 }

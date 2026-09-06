@@ -1,4 +1,4 @@
-import { CheckCircle2, Hammer, Sparkles, CalendarClock } from "lucide-react";
+import { CheckCircle2, Hammer, CalendarClock } from "lucide-react";
 import Image from "next/image";
 import { SITE, waLink } from "@/lib/site";
 import { Reveal } from "@/components/motion/Reveal";
@@ -15,8 +15,8 @@ export const metadata: Metadata = {
 const STEPS = [
   { n: "01", t: "Sopralluogo gratuito", d: "Valutiamo con te obiettivi, pratiche ed aspetti tecnici senza impegno." },
   { n: "02", t: "Progetto e preventivo", d: "Ti proponiamo soluzioni costruttive ed economiche ottimali." },
-  { n: "03", t: "Cantiere coordinato", d: "Un unico referente, squadre specializzate, cantine pulite e sicure." },
-  { n: "04", t: "Consegna chiavi in mano", d: "Collaudow, documentazione e assistenza post-vendita." },
+  { n: "03", t: "Cantiere coordinato", d: "Un unico referente, squadre specializzate, cantieri puliti e sicuri." },
+  { n: "04", t: "Consegna chiavi in mano", d: "Collaudo, documentazione e assistenza post-vendita." },
 ];
 
 const FEATURES = [
@@ -123,8 +123,8 @@ export default function RistrutturazioniPage() {
         </Reveal>
         <div className="mt-10 space-y-4">
           {[
-            { q: "Quanto dura in media una ristrutturazione?", a: "In genere dalle 6 alle 12 settimane per un appartamento, con fasi critiche definite in cronoprogramma. Riqualificazioni energetive complete possono allungare leggermente ma rientrano nei bonus." },
-            { q: "Posso accedere ai bonus edilizia?", a: "Sì. Ti assistiamo nella verifica dei bonus attivi (riqualificazione energetica, cortesia, sismabonus, bonus crediti) e nella documentazione necessaria." },
+            { q: "Quanto dura in media una ristrutturazione?", a: "In genere dalle 6 alle 12 settimane per un appartamento, con fasi critiche definite in cronoprogramma. Le riqualificazioni energetiche complete possono richiedere più tempo, soprattutto quando includono pratiche tecniche e autorizzazioni." },
+            { q: "Posso accedere ai bonus edilizi?", a: "Sì. Ti assistiamo nella verifica dei bonus attivi per riqualificazione energetica, ristrutturazione e interventi strutturali, preparando la documentazione necessaria." },
             { q: "Gestite anche impianti e materiali?", a: "Sì: lavoriamo con tecnologie all’avanguardia e gestiamo in autonomia impianti, finestrature, cappotto, pavimenti e finiture, anche di design." },
           ].map((f, i) => (
             <Reveal key={f.q} delay={0.05 * i}>

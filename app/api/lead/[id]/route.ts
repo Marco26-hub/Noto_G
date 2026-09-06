@@ -5,6 +5,6 @@ import { deleteLead } from "@/lib/db";
 export async function DELETE(_req: Request, ctx: RouteContext<"/api/lead/[id]">) {
   if (!(await isAuthenticated())) return NextResponse.json({ ok: false }, { status: 401 });
   const { id } = await ctx.params;
-  deleteLead(id);
+  await deleteLead(id);
   return NextResponse.json({ ok: true });
 }

@@ -1,29 +1,32 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-import crypto from "crypto";
+import { handleUpload, type HandleUploadBody } from "@vercel/blob/client";
 import { isAuthenticated } from "@/lib/auth";
 
-const UPLOAD_DIR = path.join(process.cwd(), "public", "uploads");
-const ALLOWED = new Set(["image/jpeg", "image/png", "image/webp", "image/avif", "image/gif"]);
+const ALLOWED = ["image/jpeg", "image/png", "image/webp", "image/avif"];
 const MAX = 10 * 1024 * 1024;
 
-export async function POST(req: Request) {
+export async function POST(request: Request) {
   if (!(await isAuthenticated())) return NextResponse.json({ ok: false }, { status: 401 });
-  const form = await req.formData().catch(() => null);
-  if (!form) return NextResponse.json({ ok: false, error: "FormData atteso" }, { status: 400 });
-  const files = form.getAll("files").filter((f): f is File => f instanceof File);
-  if (!files.length) return NextResponse.json({ ok: false, error: "Nessun file" }, { status: 400 });
-
-  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
-  const urls: string[] = [];
-  for (const file of files) {
-    if (!ALLOWED.has(file.type) || file.size > MAX) continue;
-    const ext = file.type === "image/png" ? "png" : file.type === "image/webp" ? "webp" : file.type === "image/avif" ? "avif" : file.type === "image/gif" ? "gif" : "jpg";
-    const name = `${Date.now()}-${crypto.randomBytes(4).toString("hex")}.${ext}`;
-    const buffer = Buffer.from(await file.arrayBuffer());
-    fs.writeFileSync(path.join(UPLOAD_DIR, name), buffer);
-    urls.push(`/uploads/${name}`);
+  if (!process.env.BLOB_READ_WRITE_TOKEN) {
+    return NextResponse.json({ ok: false, error: "Storage immagini non configurato" }, { status: 503 });
   }
-  return NextResponse.json({ urls });
+
+  const body = (await request.json().catch(() => null)) as HandleUploadBody | null;
+  if (!body) return NextResponse.json({ ok: false, error: "Richiesta non valida" }, { status: 400 });
+
+  try {
+    const response = await handleUpload({
+      request,
+      body,
+      onBeforeGenerateToken: async () => ({
+        allowedContentTypes: ALLOWED,
+        maximumSizeInBytes: MAX,
+        addRandomSuffix: true,
+      }),
+    });
+    return NextResponse.json(response);
+  } catch (error) {
+    console.error("Blob upload failed", error);
+    return NextResponse.json({ ok: false, error: "Upload non riuscito" }, { status: 500 });
+  }
 }

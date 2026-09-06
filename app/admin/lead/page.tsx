@@ -5,7 +5,7 @@ import { CalendarClock, Mail, Phone } from "lucide-react";
 export const dynamic = "force-dynamic";
 
 export default async function LeadsPage() {
-  const leads = getLeads();
+  const leads = await getLeads();
   return (
     <div className="max-w-4xl">
       <h1 className="font-display text-2xl font-bold text-white">Richieste ricevute</h1>

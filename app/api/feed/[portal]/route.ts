@@ -10,7 +10,7 @@ export async function GET(req: Request, ctx: RouteContext<"/api/feed/[portal]">)
   if (!hasValidFeedKey(searchParams.get("key"))) {
     return NextResponse.json({ ok: false, error: "Chiave feed non valida" }, { status: 403 });
   }
-  const props = getProperties();
+  const props = await getProperties();
   const base = SITE.base;
 
   if (portal === "immobiliare") {

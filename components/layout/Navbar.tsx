@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
-import { SITE, waLink } from "@/lib/site";
+import { waLink } from "@/lib/site";
 
 const NAV = [
   { href: "/", label: "Home" },
