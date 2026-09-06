@@ -19,5 +19,5 @@ export async function POST(req: Request) {
     createdAt: new Date().toISOString(),
   };
   await addLead(lead);
-  return NextResponse.json({ ok: true });
+  return NextResponse.json({ ok: true, id: lead.id });
 }
